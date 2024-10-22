@@ -4,7 +4,7 @@
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    height: 231px;
+    height: fit-content;
     margin-top: 80px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
