@@ -1,0 +1,36 @@
+.user-assets-transactions{
+    background-color: white;
+    border-radius: 12px;
+    display: flex;
+    height: 231px;
+    margin-top: 80px;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tab{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    width: 50%;
+    padding: 0 0 0 100px;
+}
+
+.tab button{
+    cursor: pointer;
+    text-align: left;
+    height: 20%;
+    width: 100%;
+    background-color: aqua;
+    border-style: none;
+}
+
+.user-assets-transactions-page{
+    height: 100%;
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+}
+

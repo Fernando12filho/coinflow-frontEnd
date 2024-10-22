@@ -1,0 +1,54 @@
+.hero{
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 100px;
+    display: flex;
+    height: 231px;
+    margin-top: 80px;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hero-children{
+    font-family: "BarlowCondensed";
+    background-color: #FFFFFF;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 12px;
+    max-width: 480px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-children h2{
+    background-color: white;
+}
+
+.hero-children p{
+    background-color: white;
+    margin-right: 12px;
+}
+
+.hero-children img{
+    background-color: white;
+}
+
+.btc-amount-quantity{
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.hero-children button{
+    border-style: none;
+    border-radius: 12px;
+    background-color: #0088CC;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    height: 48px;
+    width: 270px;
+}

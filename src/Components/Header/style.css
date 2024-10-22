@@ -1,0 +1,67 @@
+@font-face {
+    font-family: 'BarlowCondensed';
+    src: url(../../fonts/Barlow_Condensed/BarlowCondensed-Regular.ttf),
+    url(../../fonts/Barlow_Condensed/BarlowCondensed-Bold.ttf);
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    font-family:'BarlowCondensed';  
+    
+}
+
+p{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.logo{
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+}
+
+.logo img{
+    width: 80px;
+    height: 80px;
+}
+
+.logo p{
+    margin-left: 16px;
+    align-self: center;
+
+}
+
+.username-logout{
+    display: flex;
+    width: fit-content;
+    align-items: center;
+}
+
+.username{
+    display: flex;
+    margin-right: 16px;
+}
+
+.username img{
+    width: 40px;
+    height: 40px;   
+}
+
+.username p{
+    align-self: center;
+    color: #0088CC;
+}
+
+.username-logout button{
+    font-family: 'BarlowCondensed';
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    background-color: #0088CC;
+    text-align: center;
+    border-style: none;
+    border-radius: 12px;
+    width: 105px;
+    height: 42px;
+}

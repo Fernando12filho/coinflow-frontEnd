@@ -1,0 +1,23 @@
+/*
+    Max-width to fit components
+*/
+
+@font-face {
+    font-family: 'BarlowCondensed';
+    src: url(../src/fonts/Barlow_Condensed/BarlowCondensed-Regular.ttf),
+    url(../src/fonts/Barlow_Condensed/BarlowCondensed-Bold.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    background-color: #EEEEEE;
+}
+
+
+
+.App{
+    margin: 0 auto;
+    padding: 40px ;
+    max-width: 1440px;
+}
