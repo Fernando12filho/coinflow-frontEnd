@@ -1,36 +1,56 @@
 .user-assets-transactions{
+    font-family: 'BarlowCondensed';
     background-color: white;
     border-radius: 12px;
     display: flex;
+    flex-direction: column;
     height: 231px;
     margin-top: 80px;
-    justify-content: space-between;
-    align-items: center;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.tab{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100%;
+.button-tabs{
+    background-color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.button-tabs button{ 
+    font-family: 'BarlowCondensed';
+    font-size: 32px;
+    font-weight: bold;
     width: 50%;
-    padding: 0 0 0 100px;
-}
-
-.tab button{
-    cursor: pointer;
-    text-align: left;
-    height: 20%;
-    width: 100%;
-    background-color: aqua;
+    height: 54px;
     border-style: none;
+    cursor: pointer;
+    text-align: left;   
 }
 
-.user-assets-transactions-page{
+.button-tabs button.deactivated{
+    background-color: E3E3E3;
+    color: #979797;
+}
+
+.button-tabs button.active{   
+    background-color: white;
+    color: black;
+}
+
+#button-right{
+    border-radius: 0 12px 0 50px;
+    padding-left: 48px;
+}
+
+#button-left{
+    border-radius: 12px 0 50px 0;
+    padding-left: 48px;
+}
+
+.tab-content{
+    background-color: white;
     height: 100%;
-    background-color: aquamarine;
     display: flex;
     align-items: center;
+    border-radius: 12px;
 }
+
 
