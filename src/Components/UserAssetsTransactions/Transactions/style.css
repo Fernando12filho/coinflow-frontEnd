@@ -70,6 +70,25 @@
     color: #c04848;
     cursor: pointer;
   }
+
+  .view-all{
+    background-color: white;
+    margin-top: 12px;
+    display: flex;
+    height: 16px;
+    justify-content: center;
+  }
+
+  .view-all p{
+    font-weight: lighter;
+    background-color: transparent;
+    font-size: 16px;
+  }
+
+  .view-all p:hover{
+    cursor: pointer;
+    font-weight: bold;
+  }
   
 
   
