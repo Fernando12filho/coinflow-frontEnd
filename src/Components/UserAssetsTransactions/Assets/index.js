@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 import plus from "../../../images/plus.svg";
-import assets from "../../TestObjects";
+import assets from "../../TestObjects/assetObjets.js";
 
 // Todo: "Add Assets will pop up a panal list with a list of assets
 // that can be followed by the user"
@@ -21,7 +21,7 @@ function Assets() {
         <div
           className="asset-card"
           key={index}
-          style={{ backgroundColor: assets.backgroundColor }}
+          style={{backgroundColor: assets.color}}
         >
           <img src={assets.image} alt="Crypto" />
           <p id="card-middle">{assets.name}</p>

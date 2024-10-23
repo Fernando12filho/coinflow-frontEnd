@@ -1,0 +1,75 @@
+.transactions-panel{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: left;
+    align-items: left;
+    padding-left: 44px;
+    padding-right: 44px;
+    height: 230px;
+    border-radius: 12px;
+  }
+
+  .transactions-titles{
+    background-color: white;
+    font-weight: bold;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .transactions-titles p{
+    font-size: 24px;
+    background-color: white;
+    max-width: 133px;
+    min-width: fit-content;
+  }
+
+  .transactions-input {
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .transactions-input:hover{
+    border-bottom: 2px solid black;
+    
+  }
+
+
+  .transactions-input p{
+    font-size: 20;
+    color: #979797;
+    font-weight:normal;
+    display: flex;
+    flex-direction: left;
+    background-color: white;
+    width: 133px;
+  }
+.transactions-titles button{
+    color: white;
+    font-size: 18px;   
+    background-color: white;
+    max-width: 133px;
+    min-width: fit-content;
+    border-style: none;
+}
+  .transactions-input button{
+    font-size: 18px;
+    background-color: white;
+    max-width: 133px;
+    min-width: fit-content;
+    border-style: none;
+    color: #979797;
+  }
+
+  .transactions-input button:hover{
+    color: #c04848;
+    cursor: pointer;
+  }
+  
+
+  
