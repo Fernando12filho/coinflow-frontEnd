@@ -12,7 +12,7 @@
   }
 
   .transactions-titles{
-    background-color: white;
+    background-color: transparent;
     font-weight: bold;
     display: flex;
     width: 100%;
@@ -21,22 +21,31 @@
 
   .transactions-titles p{
     font-size: 24px;
-    background-color: white;
+    background-color: transparent;
     max-width: 133px;
     min-width: fit-content;
   }
 
   .transactions-input {
-    background-color: white;
+    background-color: transparent;
     cursor: pointer;
     display: flex;
     width: 100%;
     justify-content: space-between;
   }
 
+  .transactions-input-bg{
+    background-color: transparent;
+  }
+
   .transactions-input:hover{
     border-bottom: 2px solid black;
-    
+    border-radius: 2px;
+
+    .transactions-input p{
+      font-weight: bold;
+      color: black;
+    }
   }
 
 
@@ -46,7 +55,7 @@
     font-weight:normal;
     display: flex;
     flex-direction: left;
-    background-color: white;
+    background-color: transparent;
     width: 133px;
   }
 .transactions-titles button{
