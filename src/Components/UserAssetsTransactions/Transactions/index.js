@@ -19,7 +19,7 @@ function Transactions() {
         <button> Delete </button>
       </div>
       {transactions.map((transactions, index) => (
-        <div>
+        <div className="transactions-input-bg">
           <div className="transactions-input">
             <p>{transactions.coin_name}</p>
             <p>{transactions.transaction_id}</p>
