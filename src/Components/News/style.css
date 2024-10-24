@@ -1,0 +1,67 @@
+.news-panel-grid {
+  font-family: "BarlowCondensed";
+  background-color: #040714;
+  border-radius: 12px;
+  width: 100%;
+  display: grid;
+  min-height: 480px;
+  margin-top: 80px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  grid-template-columns: 50% 25% 25%;
+  grid-template-rows: 50% 50%;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: 100%;
+  background-color: lightgray;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+.grid-item h1{
+  background-color: transparent;
+}
+
+.grid-item p{
+  font-size: 20px;
+  font-weight: normal;
+  background-color: transparent;
+}
+
+
+
+.main-new {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 40px;
+  color: black;
+  grid-row: 1 / 3; /* Occupy the first two rows */
+  margin: 40px 20px 40px 40px;
+  color: white; /* Make sure text is readable on background image */
+}
+
+.main-new p{
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.secondary-news {
+  margin: 40px 10px 12px 10px;
+}
+
+.terceary-news {
+  margin: 12px 10px 40px 10px;
+}
+
+/* Ensure all grid items are styled for images */
+.grid-item {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 10px;
+  color: white;
+}
