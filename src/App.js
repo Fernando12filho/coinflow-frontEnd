@@ -8,16 +8,22 @@ import Home from "./Components/home";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+
   const handleLoginSuccess = () => {
     setIsLoggedIn(true); // Update state to reflect the login status
   };
 
+
+  const handleLogoutSuccess = () => {
+    setIsLoggedIn(false);
+  }
+
   return (
     <div className="App">
       {isLoggedIn ? (
-        <Home /> // Show main app page if logged in
+        <Home onLogoutSuccess={handleLogoutSuccess}/> // Show main app page if logged in
       ) : (
-        <LogIn onLoginSuccess={handleLoginSuccess} /> // Pass down the callback
+        <LogIn onLoginSuccess={handleLoginSuccess}/> // Pass down the callback
       )}
     </div>
   );

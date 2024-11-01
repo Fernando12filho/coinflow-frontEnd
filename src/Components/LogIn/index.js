@@ -19,12 +19,33 @@ function LogIn({ onLoginSuccess }) {
   }
 
 
-  async function handleSubmit(e) {
+  async function handleSubmitLogin(e) {
     e.preventDefault();
     axios
       .post(`http://127.0.0.1:5000/auth/login`, formData)
       .then((response) => {
         onLoginSuccess()
+        console.log(response);
+        setFormData({username: "", password: ""});
+      })
+      .catch((error) => {
+        alert("Check username or password")
+        console.log({"success": false, "error": "Check username or password"})
+      });
+
+    console.log(signIn);
+    console.log(formData);
+  }
+
+  async function handleSubmitRegister(e) {
+    e.preventDefault();
+    axios
+      .post(`http://127.0.0.1:5000/auth/register`, formData)
+      .then((response) => {
+        alert("Registration complete")
+        registerLogInChanger()
+        setFormData({username: "", password: ""});
+        setSignIn(false);
         console.log(response);
       })
       .catch((error) => {
@@ -69,7 +90,7 @@ function LogIn({ onLoginSuccess }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" onClick={handleSubmit}>
+            <button type="submit" onClick={handleSubmitRegister}>
               Sign In
             </button>
           </form>
@@ -92,7 +113,7 @@ function LogIn({ onLoginSuccess }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" onClick={handleSubmit}>
+            <button type="submit" onClick={handleSubmitLogin}>
               Log In
             </button>
           </form>

@@ -3,10 +3,10 @@ import Hero from "./Hero";
 import News from "./News";
 import UserAssetsTransactions from "./UserAssetsTransactions";
 
-function Home() {
+function Home({ onLogoutSuccess }) {
   return (
     <div>
-      <Header />
+      <Header onLogoutSuccess={ onLogoutSuccess} />
       <Hero />
       <UserAssetsTransactions />
       <News />
