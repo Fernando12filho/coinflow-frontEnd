@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-import Header from "./Components/Header";
-import Hero from "./Components/Hero";
-import UserAssetsTransactions from "./Components/UserAssetsTransactions";
-import News from "./Components/News";
 import LogIn from "./Components/LogIn";
 import Home from "./Components/home";
 
