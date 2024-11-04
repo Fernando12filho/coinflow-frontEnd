@@ -49,6 +49,7 @@ function LogIn({ onLoginSuccess }) {
         console.log(response);
       })
       .catch((error) => {
+        alert("Failed to register")
         console.log(error)
       });
 

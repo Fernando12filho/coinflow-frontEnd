@@ -7,7 +7,7 @@ import Home from "./Components/home";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [userData, setUserData] = useState([]);
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true); // Update state to reflect the login status
@@ -17,6 +17,7 @@ function App() {
   const handleLogoutSuccess = () => {
     setIsLoggedIn(false);
   }
+
 
   return (
     <div className="App">
