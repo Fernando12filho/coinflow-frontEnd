@@ -1,70 +1,146 @@
-# Getting Started with Create React App
+Here are initial README files for both the frontend and backend applications. Adjust the details according to your specific project structure, dependencies, and usage instructions.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+### Frontend (React)
 
-In the project directory, you can run:
+#### `README.md` for Frontend
 
-### `npm start`
+```markdown
+# CoinFlow - Frontend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This repository contains the frontend for the CoinFlow application. CoinFlow allows users to track their cryptocurrency investments, view market trends, and manage transaction history with a focus on ease of use and accessibility.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Technologies](#technologies)
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd frontend
+   ```
 
-### `npm run build`
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Run the application**
+   ```bash
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The application will start on `http://localhost:3000`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage
 
-### `npm run eject`
+The frontend connects to the CoinFlow backend API to provide the following features:
+- User authentication (login and signup)
+- Display user’s assets and transaction history
+- Real-time news and market trends related to cryptocurrency
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Configuration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Update the `baseURL` in `App.js` to match the backend API’s URL if different from the default (`http://127.0.0.1:5000`).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Project Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+frontend/
+├── public/               # Public assets and index.html
+├── src/                  # Source files
+│   ├── components/       # React components (e.g., LogIn, UserAssetsTransactions, etc.)
+│   ├── images/           # Image assets, including the app logo
+│   ├── App.js            # Main application entry
+│   └── index.js          # Application entry point
+└── package.json
+```
 
-## Learn More
+## Technologies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- React
+- Axios
+- CSS (for styling)
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+### Backend (Flask)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### `README.md` for Backend
 
-### Analyzing the Bundle Size
+```markdown
+# CoinFlow - Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This repository contains the backend API for the CoinFlow application. It serves as the primary data provider for CoinFlow's frontend, handling user authentication, asset management, transaction history, and news feeds.
 
-### Making a Progressive Web App
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Technologies](#technologies)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Installation
 
-### Advanced Configuration
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd backend
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+2. **Create and activate a virtual environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
 
-### Deployment
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+4. **Run the application**
+   ```bash
+   flask run
+   ```
 
-### `npm run build` fails to minify
+The backend API will start on `http://127.0.0.1:5000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Configuration
+
+Ensure CORS is enabled in `__init__.py` for smooth communication between the frontend and backend. You may update the allowed origins as per your requirements.
+
+## Usage
+
+The backend provides several endpoints for:
+- User session management (login, signup)
+- Retrieving and managing assets and transactions
+- Displaying news and market data
+
+## API Endpoints
+
+Here is an overview of the key endpoints:
+
+| Endpoint                  | Method | Description                              |
+|---------------------------|--------|------------------------------------------|
+| `/api/user/login`         | POST   | Logs in a user                           |
+| `/api/user/register`      | POST   | Registers a new user                     |
+| `/api/user/session`       | GET    | Verifies user session                    |
+| `/api/user/investments`   | GET    | Retrieves user’s investment details      |
+| `/api/news`               | GET    | Fetches real-time news and market trends |
+
+## Technologies
+
+- Flask
+- Flask-CORS
+- SQLite3 (or your chosen database)
+```
+
+---
+
+Adjust any specific details based on the current status of your project. Let me know if you want to include any additional sections or information.
