@@ -4,28 +4,38 @@ import Hero from "./Hero";
 import News from "./News";
 import UserAssetsTransactions from "./UserAssetsTransactions";
 import axios from "axios";
-import { system } from "@chakra-ui/react/preset";
+
 
 
 // Connects to the API, retrieves user data, send it to app.js or change global state
-function Home({ onLogoutSuccess }) {
-  const [userData, setUserData] = useState([]);
-  const [userTransactions, setUserTransactions] = useState([])
-  // Makes the connection to the api, retriving information from user and pass it down
-  // to other components
+function Home({ onLogoutSuccess, userData }) {
+  const [userInfo, setUserInfo] = useState(null);
+
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/`).then((res) => {
-      setUserData(res)
-      console.log(userData)
-    }).catch((error) => {
-      console.log({"error": error, "reason": "loging failed"})
-    }).then(
-      //onLogoutSuccess(true)
-    )
-  },[userData])
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:5000/");
+        if (response.data.user) {
+          setUserInfo(response.data); // Store user info from the response
+        } else {
+          alert("User not logged in");
+          onLogoutSuccess(); // Log out if no user info found
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []); // Only run once when component mounts
+
+  if (!userInfo) {
+    return <div>Loading...</div>; // Show loading while fetching data
+  }
+  
   return (
     <div>
-      <Header onLogoutSuccess={ onLogoutSuccess} />
+      <Header onLogoutSuccess={ onLogoutSuccess} userData ={userData} />
       <Hero />
       <UserAssetsTransactions />
       <News />

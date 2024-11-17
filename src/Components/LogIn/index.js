@@ -2,12 +2,17 @@ import { React, useState } from "react";
 import "./style.css";
 import logo from "../../images/Logo.svg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // TODO: Placeholders should disappear  when user clicks it
 // TODO: Change color according signIn state
+
+axios.defaults.withCredentials = true
+
 function LogIn({ onLoginSuccess }) {
   const [signIn, setSignIn] = useState(false);
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const navigate = useNavigate();
 
   function registerLogInChanger() {
     setSignIn(!signIn);
@@ -21,20 +26,16 @@ function LogIn({ onLoginSuccess }) {
 
   async function handleSubmitLogin(e) {
     e.preventDefault();
-    axios
-      .post(`http://127.0.0.1:5000/auth/login`, formData)
-      .then((response) => {
-        onLoginSuccess()
-        console.log(response);
-        setFormData({username: "", password: ""});
-      })
-      .catch((error) => {
-        alert("Check username or password")
-        console.log({"success": false, "error": "Check username or password"})
-      });
-
-    console.log(signIn);
-    console.log(formData);
+    try {
+      const response = await axios.post(`http://127.0.0.1:5000/auth/login`, formData);
+      const user = response.data; // Assuming the API returns the user data
+      onLoginSuccess(user); // Pass user data to App.js
+      setFormData({ username: "", password: "" });
+      navigate("/index");
+    } catch (error) {
+      alert("Check username or password");
+      console.log(error);
+    }
   }
 
   async function handleSubmitRegister(e) {
@@ -110,11 +111,11 @@ function LogIn({ onLoginSuccess }) {
                 placeholder="Password"
                 type="password"
                 id="password"
-                value={formData.password}
+                value={formData.password}submit-login-signin
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" onClick={handleSubmitLogin}>
+            <button type="submit" id="submit-login-signin" onClick={handleSubmitLogin}>
               Log In
             </button>
           </form>

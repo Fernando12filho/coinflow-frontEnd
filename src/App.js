@@ -9,22 +9,24 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (data) => {
     setIsLoggedIn(true); // Update state to reflect the login status
+    setUserData(data)
   };
 
 
   const handleLogoutSuccess = () => {
     setIsLoggedIn(false);
+    setUserData(null)
   }
 
 
   return (
     <div className="App">
       {isLoggedIn ? (
-        <Home onLogoutSuccess={handleLogoutSuccess}/> // Show main app page if logged in
+        <Home userData={userData} onLogoutSuccess={handleLogoutSuccess}/> // Show main app page if logged in
       ) : (
-        <LogIn onLoginSuccess={handleLoginSuccess}/> // Pass down the callback
+        <LogIn userData={userData} onLoginSuccess={handleLoginSuccess}/> // Pass down the callback
       )}
     </div>
   );

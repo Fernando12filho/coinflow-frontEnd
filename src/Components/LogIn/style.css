@@ -87,4 +87,18 @@ input{
 form{
     width: 100%;
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+#submit-login-signin{
+    margin-top: 12px;
+    background-color: #a09d9d;
+    border-radius: 8px;
+    width: 50%;
+    color: white;
+    height: 24px;
+    align-self: center;
+    border-style: none;
+    text-align: center;
 }

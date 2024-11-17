@@ -3,7 +3,7 @@ import "./style.css";
 import user from "../../images/user.svg";
 import Logo from "../../images/Logo.svg";
 
-function Header({ onLogoutSuccess }) {
+function Header({ onLogoutSuccess, userData }) {
   async function handleLogout(e) {
     e.preventDefault();
     onLogoutSuccess();
@@ -17,7 +17,7 @@ function Header({ onLogoutSuccess }) {
       <div className="username-logout">
         <div className="username">
           <img src={user} alt="User" />
-          <p>username</p>
+          <p>{userData.username}</p>
         </div>
         <button onClick={handleLogout}>Log Out</button>
       </div>
