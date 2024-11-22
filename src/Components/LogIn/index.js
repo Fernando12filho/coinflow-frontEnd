@@ -31,11 +31,14 @@ function LogIn({ onLoginSuccess }) {
       const user = response.data; // Assuming the API returns the user data
       onLoginSuccess(user); // Pass user data to App.js
       setFormData({ username: "", password: "" });
+      console.log("User data is: ", user);
       navigate("/index");
     } catch (error) {
       alert("Check username or password");
       console.log(error);
     }
+
+    
   }
 
   async function handleSubmitRegister(e) {

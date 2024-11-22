@@ -2,11 +2,11 @@ import React from "react";
 import "./style.css";
 import transactions from "../../TestObjects/transactionObjects.js";
 
-
-// Receive transactions made by the user: 
+// Receive transactions made by the user:
 // TODO: Spacement is not yet complete, for sure bugs will happen
 
-function Transactions() {
+function Transactions({ userInfo }) {
+  console.log(userInfo);
   return (
     <div className="transactions-panel">
       <div className="transactions-titles">
@@ -18,18 +18,31 @@ function Transactions() {
         <p>Profit / Loss</p>
         <button> Delete </button>
       </div>
-      {transactions.map((transactions, index) => (
+      {userInfo.investments.map((userInfo, index) => (
         <div className="transactions-input-bg">
           <div className="transactions-input">
-            <p>{transactions.coin_name}</p>
-            <p>{transactions.transaction_id}</p>
-            <p>{transactions.purchase_amount}</p>
-            <p>{transactions.coin_amount}</p>
-            <p>{transactions.purchase_price}</p>
-            <p>{transactions.profit_loss}</p>
+            <p>{userInfo.coin_name}</p>
+            <p>{userInfo.id}</p>
+            <p>
+              {new Date(userInfo.purchase_date).toLocaleDateString("en-US")}
+            </p>
+            <p>{userInfo.amount}</p>
+            <p>{userInfo.purchase_price}</p>
+            <p
+              style={{
+                color:
+                  userInfo.profit_loss > 0
+                    ? "green"
+                    : userInfo.profit_loss < 0
+                    ? "red"
+                    : "black",
+              }}
+            >
+              {userInfo.profit_loss}
+            </p>
             <button> Delete </button>
           </div>
-        </div>   
+        </div>
       ))}
       <div className="view-all">
         <p>View All</p>

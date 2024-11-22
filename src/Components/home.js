@@ -7,7 +7,7 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 // Connects to the API, retrieves user data, send it to app.js or change global state
-function Home({ onLogoutSuccess, userData }) {
+function Home({ onLogoutSuccess }) {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function Home({ onLogoutSuccess, userData }) {
         const response = await axios.get("http://127.0.0.1:5000/");
         if (response.data.user) {
           setUserInfo(response.data); // Store user info from the response
-          console.log(userInfo);
+          console.log("user info is: ", userInfo);
         } else {
           alert("User not logged in");
           onLogoutSuccess(); // Log out if no user info found
@@ -37,7 +37,7 @@ function Home({ onLogoutSuccess, userData }) {
     <div>
       <Header onLogoutSuccess={onLogoutSuccess} userInfo={userInfo} />
       <Hero userInfo={userInfo}/>
-      <UserAssetsTransactions />
+      <UserAssetsTransactions userInfo={userInfo}/>
       <News />
     </div>
   );

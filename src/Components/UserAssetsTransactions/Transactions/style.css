@@ -9,6 +9,7 @@
     padding-right: 44px;
     height: 230px;
     border-radius: 12px;
+    overflow-y:scroll;
   }
 
   .transactions-titles{

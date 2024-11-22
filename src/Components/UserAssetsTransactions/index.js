@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Transactions from "./Transactions";
 import Assets from "./Assets";
 import "./style.css";
+import axios from "axios";
 
-function UserAssetsTransactions() {
+axios.defaults.withCredentials = true;
+function UserAssetsTransactions({ userInfo }) {
   // State to keep track of the active tab
   const [activeTab, setActiveTab] = useState("assets");
 
@@ -28,7 +30,7 @@ function UserAssetsTransactions() {
 
       <div className="tab-content">
         {activeTab === "assets" && <Assets />}
-        {activeTab === "transactions" && <Transactions />}
+        {activeTab === "transactions" && <Transactions userInfo={userInfo}/>}
       </div>
     </div>
   );

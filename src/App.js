@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       {isLoggedIn ? (
-        <Home userData={userData} onLogoutSuccess={handleLogoutSuccess}/> // Show main app page if logged in
+        <Home onLogoutSuccess={handleLogoutSuccess}/> // Show main app page if logged in
       ) : (
         <LogIn userData={userData} onLoginSuccess={handleLoginSuccess}/> // Pass down the callback
       )}
