@@ -9,14 +9,20 @@
     padding-right: 44px;
     height: 230px;
     border-radius: 12px;
+    overflow-y:scroll;
+    position: relative; /* Ensures child elements with sticky positioning respect this container */
   }
 
   .transactions-titles{
-    background-color: transparent;
+    background-color: white; /* To avoid overlapping background issues */
     font-weight: bold;
     display: flex;
     width: 100%;
     justify-content: space-between;
+    position: sticky; /* Makes the titles stick */
+    top: 0; /* Sticks to the top of the container */
+    z-index: 10; /* Ensures it stays on top of the scrolling content */
+    padding: 4px 0; /* Adds some padding to make it more visually appealing */
   }
 
   .transactions-titles p{
@@ -81,6 +87,10 @@
   }
 
   .view-all{
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    padding: 8px 0;
     background-color: white;
     margin-top: 12px;
     display: flex;
@@ -88,13 +98,15 @@
     justify-content: center;
   }
 
-  .view-all p{
+  .view-all a{
+    text-decoration: none;
+    color: black;
     font-weight: lighter;
     background-color: transparent;
     font-size: 16px;
   }
 
-  .view-all p:hover{
+  .view-all a:hover{
     cursor: pointer;
     font-weight: bold;
   }
