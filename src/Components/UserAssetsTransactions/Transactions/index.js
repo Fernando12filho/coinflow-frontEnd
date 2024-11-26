@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import transactions from "../../TestObjects/transactionObjects.js";
+
 
 // Receive transactions made by the user:
 // TODO: Spacement is not yet complete, for sure bugs will happen
@@ -45,7 +45,7 @@ function Transactions({ userInfo }) {
         </div>
       ))}
       <div className="view-all">
-        <p>View All</p>
+        <a href=".">View All</a>
       </div>
     </div>
   );

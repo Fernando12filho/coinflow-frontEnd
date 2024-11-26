@@ -1,32 +1,34 @@
-import React, { useState } from "react";
-import "./App.css";
-import LogIn from "./Components/LogIn";
-import Home from "./Components/home";
-
-//const baseURL = "http://127.0.0.1:5000"
+import React, { useState } from "react"; // Import React and useState hook
+import "./App.css"; // Styles specific to App
+import LogIn from "./Components/LogIn"; // Login component for user authentication
+import Home from "./Components/home"; // Home component to display main app after login
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState();
-  const [userData, setUserData] = useState([]);
+  // State to track user login status and user-specific data
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
 
+  // Callback for successful login, sets login state and stores user data
   const handleLoginSuccess = (data) => {
-    setIsLoggedIn(true); // Update state to reflect the login status
-    setUserData(data)
+    setIsLoggedIn(true);
+    setUserData(data);
   };
 
-
+  // Callback for logout, resets login state and clears user data
   const handleLogoutSuccess = () => {
     setIsLoggedIn(false);
-    setUserData(null)
-  }
-
+    setUserData(null);
+  };
 
   return (
     <div className="App">
+      {/* Conditionally render based on login state */}
       {isLoggedIn ? (
-        <Home onLogoutSuccess={handleLogoutSuccess}/> // Show main app page if logged in
+        // Pass logout callback to Home for user logout functionality
+        <Home onLogoutSuccess={handleLogoutSuccess} />
       ) : (
-        <LogIn userData={userData} onLoginSuccess={handleLoginSuccess}/> // Pass down the callback
+        // Pass login callback to LogIn for handling user authentication
+        <LogIn userData={userData} onLoginSuccess={handleLoginSuccess} />
       )}
     </div>
   );

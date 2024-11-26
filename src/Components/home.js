@@ -1,43 +1,46 @@
-import { useEffect, useState } from "react";
-import Header from "./Header";
-import Hero from "./Hero";
-import News from "./News";
-import UserAssetsTransactions from "./UserAssetsTransactions";
-import axios from "axios";
+import { useEffect, useState } from "react"; // React hooks
+import Header from "./Header"; // Header component (e.g., navigation, logout)
+import Hero from "./Hero"; // Hero section, likely a main banner or summary
+import News from "./News"; // News component, displays live cryptocurrency news
+import UserAssetsTransactions from "./UserAssetsTransactions"; // User-specific financial data
+import axios from "axios"; // HTTP client for API requests
 
-axios.defaults.withCredentials = true;
-// Connects to the API, retrieves user data, send it to app.js or change global state
+axios.defaults.withCredentials = true; // Ensure cookies are sent with requests
+
+// Home component: fetches user data and renders the main app layout
 function Home({ onLogoutSuccess }) {
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(null); // Stores user information
 
+  // Fetch user data on component mount
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/");
+        const response = await axios.get("http://127.0.0.1:5000/"); 
         if (response.data.user) {
-          setUserInfo(response.data); // Store user info from the response
-          console.log("user info is: ", userInfo);
+          setUserInfo(response.data); 
         } else {
           alert("User not logged in");
-          onLogoutSuccess(); // Log out if no user info found
+          onLogoutSuccess(); 
         }
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching user data:", error); 
       }
     };
 
-    fetchUserData();
-  }, []); // Only run once when component mounts
+    fetchUserData(); 
+  }, []); 
 
+  // Render loading state while waiting for user info
   if (!userInfo) {
-    return <div>Loading...</div>; // Show loading while fetching data
+    return <div>Loading...</div>;
   }
 
+  // Render main components after user info is fetched
   return (
     <div>
       <Header onLogoutSuccess={onLogoutSuccess} userInfo={userInfo} />
-      <Hero userInfo={userInfo}/>
-      <UserAssetsTransactions userInfo={userInfo}/>
+      <Hero userInfo={userInfo} />
+      <UserAssetsTransactions userInfo={userInfo} />
       <News />
     </div>
   );
