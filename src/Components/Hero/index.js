@@ -50,6 +50,15 @@ function Hero({ userInfo }) {
       <div className="hero-children">
         <button>Add Transaction</button> {/* Placeholder for add transaction functionality */}
       </div>
+      {/* 
+      <div className="addTransactionpanel">
+        <input></input>
+        <input></input>
+        <input></input>
+        <input></input>
+        <input></input>
+      </div>
+      */}
     </div>
   );
 }
