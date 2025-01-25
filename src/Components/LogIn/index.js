@@ -27,8 +27,11 @@ function LogIn({ onLoginSuccess }) {
     try {
       const response = await axios.post(`http://127.0.0.1:5000/auth/login`, formData);
       const user = response.data; // Capture user data from the response
+      console.log(localStorage.getItem('user'));
       onLoginSuccess(user); // Notify parent of successful login
-      setFormData({ username: "", password: "" }); // Clear form
+      localStorage.setItem('user', response.data); // Store user data in local storage
+      console.log(localStorage.getItem('user'));
+      //setFormData({ username: "", password: "" }); // Clear form
       navigate("/index"); // Redirect to index page
     } catch (error) {
       alert("Check username or password"); // Notify user on error
@@ -89,7 +92,7 @@ function LogIn({ onLoginSuccess }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" onClick={handleSubmitRegister}>
+            <button type="submit" id="submit-login-signin" onClick={handleSubmitRegister}>
               Sign In
             </button>
           </form>

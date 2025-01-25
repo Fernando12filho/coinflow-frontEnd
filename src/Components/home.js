@@ -11,6 +11,8 @@ axios.defaults.withCredentials = true; // Ensure cookies are sent with requests
 function Home({ onLogoutSuccess }) {
   const [userInfo, setUserInfo] = useState(null); // Stores user information
 
+  // TODO: Refresh log out user, fix
+  
   // Fetch user data on component mount
   useEffect(() => {
     const fetchUserData = async () => {
