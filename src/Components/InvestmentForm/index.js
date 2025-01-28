@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./style.css"; // Add custom CSS for styling the popup
+import axios from "axios"; // HTTP client for API requests
+
+axios.defaults.withCredentials = true;
 
 function InvestmentsForm({ onClose, userInfo }) {
   const [formData, setFormData] = useState({
@@ -16,14 +19,8 @@ function InvestmentsForm({ onClose, userInfo }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:5000/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
+      const response = await axios.post("http://127.0.0.1:5000/create", formData);
+      if (response.data.success) {
         alert("Transaction added successfully!");
         onClose();
       } else {
