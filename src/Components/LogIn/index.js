@@ -2,13 +2,12 @@ import { React, useState } from "react";
 import "./style.css";
 import logo from "../../images/Logo.svg";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 
 // Login/Register component
 function LogIn({ onLoginSuccess }) {
   const [signIn, setSignIn] = useState(false); // Toggle between login and register
   const [formData, setFormData] = useState({ username: "", password: "" }); // Form state
-  const navigate = useNavigate();
 
   // Toggle between login and register mode
   function registerLogInChanger() {
@@ -25,14 +24,10 @@ function LogIn({ onLoginSuccess }) {
   async function handleSubmitLogin(e) {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://127.0.0.1:5000/auth/login`, formData);
+      const response = await axios.post(`http://127.0.0.1:5000/auth/login`, formData, { withCredentials: true });
       const user = response.data; // Capture user data from the response
-      console.log(localStorage.getItem('user'));
       onLoginSuccess(user); // Notify parent of successful login
-      localStorage.setItem('user', response.data); // Store user data in local storage
-      console.log(localStorage.getItem('user'));
-      //setFormData({ username: "", password: "" }); // Clear form
-      navigate("/index"); // Redirect to index page
+    
     } catch (error) {
       alert("Check username or password"); // Notify user on error
       console.error(error);
@@ -43,7 +38,7 @@ function LogIn({ onLoginSuccess }) {
   async function handleSubmitRegister(e) {
     e.preventDefault();
     axios
-      .post(`http://127.0.0.1:5000/auth/register`, formData)
+      .post(`http://127.0.0.1:5000/auth/register`, formData, { withCredentials: true })
       .then((response) => {
         alert("Registration complete"); // Notify user on success
         registerLogInChanger(); // Switch to login view
@@ -92,7 +87,7 @@ function LogIn({ onLoginSuccess }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" id="submit-login-signin" onClick={handleSubmitRegister}>
+            <button type="button" id="submit-login-signin" onClick={handleSubmitRegister}>
               Sign In
             </button>
           </form>
@@ -115,7 +110,7 @@ function LogIn({ onLoginSuccess }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" id="submit-login-signin" onClick={handleSubmitLogin}>
+            <button type="button" id="submit-login-signin" onClick={handleSubmitLogin}>
               Log In
             </button>
           </form>

@@ -5,24 +5,25 @@ import News from "./News"; // News component, displays live cryptocurrency news
 import UserAssetsTransactions from "./UserAssetsTransactions"; // User-specific financial data
 import axios from "axios"; // HTTP client for API requests
 
-axios.defaults.withCredentials = true; // Ensure cookies are sent with requests
+// axios.defaults.withCredentials = true; // Ensure cookies are sent with requests
 
 // Home component: fetches user data and renders the main app layout
-function Home({ onLogoutSuccess }) {
+function Home({ onLogoutSuccess, userData }) {
   const [userInfo, setUserInfo] = useState(null); // Stores user information
-
+  const user = userData; // User data from parent component
+  console.log("User data:", user); // Log user data
   // TODO: Refresh log out user, fix
   
   // Fetch user data on component mount
   useEffect(() => {
+    
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/"); 
+        const response = await axios.get("http://127.0.0.1:5000/", { Authorization: `Bearer ${user.access_token}` }); 
         if (response.data.user) {
           setUserInfo(response.data); 
         } else {
           alert("User not logged in");
-          onLogoutSuccess(); 
         }
       } catch (error) {
         console.error("Error fetching user data:", error); 

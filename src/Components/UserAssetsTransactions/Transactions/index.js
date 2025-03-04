@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+import axios from "axios";
 
-
+// axios.defaults.withCredentials = true;
 // Receive transactions made by the user:
 // TODO: Spacement is not yet complete, for sure bugs will happen
 
 function Transactions({ userInfo }) {
+
+  const [transactions, setTransactions] = useState([userInfo.investments]);
+
+  async function deleteTransaction(id) {
+    // Make an API request to delete the transaction with the given ID
+    try{
+      const response = await axios.delete(`http://127.0.0.1:5000/delete`, id, { withCredentials: true });
+      if(response.data.success){
+        alert("Transaction deleted successfully");
+      } else {
+        alert(response.data.message || "Failed to delete transaction.");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+      setTransactions(userInfo.investments);
+  }, [userInfo]);
+
   console.log(userInfo);
   return (
     <div className="transactions-panel">
@@ -18,29 +40,29 @@ function Transactions({ userInfo }) {
         <p>Profit / Loss</p>
         <button> Delete </button>
       </div>
-      {userInfo.investments.map((userInfo, index) => (
+      {transactions.map((transaction, index) => (
         <div className="transactions-input-bg">
           <div className="transactions-input">
-            <p>{userInfo.coin_name}</p>
-            <p>{userInfo.id}</p>
+            <p>{transaction.coin_name}</p>
+            <p>{transaction.id}</p>
             <p>
-              {new Date(userInfo.purchase_date).toLocaleDateString("en-US")}
+              {new Date(transaction.purchase_date).toLocaleDateString("en-US")}
             </p>
-            <p>{userInfo.amount}</p>
-            <p>{userInfo.purchase_price}</p>
+            <p>{transaction.amount}</p>
+            <p>{transaction.purchase_price}</p>
             <p
               style={{
                 color:
-                  userInfo.profit_loss > 0
+                  transaction.profit_loss > 0
                     ? "green"
-                    : userInfo.profit_loss < 0
+                    : transaction.profit_loss < 0
                     ? "red"
                     : "black",
               }}
             >
-              {userInfo.profit_loss}
+              {transaction.profit_loss}
             </p>
-            <button> Delete </button>
+            <button onClick={() => deleteTransaction(transaction.id)}> Delete </button>
           </div>
         </div>
       ))}
