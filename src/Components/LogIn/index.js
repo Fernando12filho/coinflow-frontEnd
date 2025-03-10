@@ -1,8 +1,9 @@
-import { React, useState, useContext, useRef, useEffect } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import "./style.css";
 import logo from "../../images/Logo.svg";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
+import { useNavigate, useLocation } from 'react-router-dom'; 
 
 const LOGIN_URL = "/auth/login";
 const REGISTER_URL = "/auth/register";
@@ -13,6 +14,10 @@ function LogIn({ onLoginSuccess }) {
   const [signIn, setSignIn] = useState(false); // Toggle between login and register
   const [formData, setFormData] = useState({ username: "", password: "" }); // Form state
   const userRef = useRef(); // Reference to user input field
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     userRef.current.focus(); // Focus on username field on component mount
@@ -43,6 +48,7 @@ function LogIn({ onLoginSuccess }) {
       setAuth({ access_token, formData }); // Store access token in context
       const user = response.data; // Capture user data from the response
       onLoginSuccess(user); // Notify parent of successful login
+      navigate(from, { replace: true });
     } catch (error) {
       alert("Check username or password"); // Notify user on error
       console.error(error);

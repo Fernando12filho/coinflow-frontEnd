@@ -9,7 +9,7 @@ axios.defaults.withCredentials = true; // Ensure cookies are sent with requests
 
 // Home component: fetches user data and renders the main app layout
 function Home({ onLogoutSuccess, userData }) {
-  const [userInfo, setUserInfo] = useState(null); // Stores user information
+  const [userInfo, setUserInfo] = useState("oi"); // Stores user information
   const user = userData; // User data from parent component
   //console.log("User data:", user.access_token); // Log user data
   // TODO: Refresh log out user, fix
