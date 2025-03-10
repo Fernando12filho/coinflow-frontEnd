@@ -1,37 +1,48 @@
-import React, { useState } from "react"; // Import React, useState, and useEffect hooks
+import React, { useContext } from "react"; // Import React, useState, and useEffect hooks
 import "./App.css"; // Styles specific to App
 import LogIn from "./Components/LogIn"; // Login component for user authentication
 import Home from "./Components/home"; // Home component to display main app after login
-
+import AuthContext from "../src/context/AuthProvider"; // Authentication context provider
+import { Routes, Route } from 'react-router-dom';
+import PersistLogin from "../src/Components/PersistLogin";
+import Layout from "./Components/Layout";
 
 
 function App() {
   // State to track user login status and user-specific data
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState(null);
+  //const { setAuth } = useContext(AuthContext);
+  const { setAuth} = useContext(AuthContext);
+  const userData = useContext(AuthContext)// Get user data from local storage
+  console.log("User data:", userData); // Log user data
 
   // Callback for successful login, sets login state and stores user data
   const handleLoginSuccess = (data) => {
-    setIsLoggedIn(true);
-    setUserData(data);  
+    //setIsLoggedIn(true);    
+    localStorage.setItem("persist", true);
+    setAuth(data);
   };
 
   // Callback for logout, resets login state and clears user data
   const handleLogoutSuccess = () => {
-    setIsLoggedIn(false);
-    setUserData(null);
+    //localStorage.clear(); // Clear user data from local storage
+    setAuth({});
+    localStorage.removeItem("persist");
+    //setIsLoggedIn(false);
   };
 
   return (
     <div className="App">
-      {/* Conditionally render based on login state */}
-      {isLoggedIn ? (
-        // Pass logout callback to Home for user logout functionality
-        <Home userData={userData} onLogoutSuccess={handleLogoutSuccess} />
-      ) : (
-        // Pass login callback to LogIn for handling user authentication
-        <LogIn userData={userData} onLoginSuccess={handleLoginSuccess} />
-      )}
+        <Routes>
+          <Route path="/" element={<Layout />} >
+            {userData ? 
+              <Route element={<PersistLogin />} >
+                <Route path="/" element={<Home userData={userData} onLogoutSuccess={handleLogoutSuccess} />} />
+                {/* <Home userData={userData} onLogoutSuccess={handleLogoutSuccess} /> */}
+              </Route>:
+              <Route path="/login" element={<LogIn userData={userData} onLoginSuccess={handleLoginSuccess} /> } /> 
+            }
+          </Route>
+        </Routes>  
     </div>
   );
 }

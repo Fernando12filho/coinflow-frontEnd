@@ -1,13 +1,22 @@
-import { React, useState } from "react";
+import { React, useState, useContext, useRef, useEffect } from "react";
 import "./style.css";
 import logo from "../../images/Logo.svg";
-import axios from "axios";
+import axios from "../../api/axios";
+import useAuth from "../../hooks/useAuth";
 
+const LOGIN_URL = "/auth/login";
+const REGISTER_URL = "/auth/register";
 
 // Login/Register component
 function LogIn({ onLoginSuccess }) {
+  const { setAuth } = useAuth(); // Get setAuth function from context
   const [signIn, setSignIn] = useState(false); // Toggle between login and register
   const [formData, setFormData] = useState({ username: "", password: "" }); // Form state
+  const userRef = useRef(); // Reference to user input field
+
+  useEffect(() => {
+    userRef.current.focus(); // Focus on username field on component mount
+  }, []);
 
   // Toggle between login and register mode
   function registerLogInChanger() {
@@ -24,10 +33,16 @@ function LogIn({ onLoginSuccess }) {
   async function handleSubmitLogin(e) {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://127.0.0.1:5000/auth/login`, formData, { withCredentials: true });
+      const response = await axios.post(LOGIN_URL, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      const access_token = response?.data?.access_token;
+      setAuth({ access_token, formData }); // Store access token in context
       const user = response.data; // Capture user data from the response
       onLoginSuccess(user); // Notify parent of successful login
-    
     } catch (error) {
       alert("Check username or password"); // Notify user on error
       console.error(error);
@@ -38,7 +53,12 @@ function LogIn({ onLoginSuccess }) {
   async function handleSubmitRegister(e) {
     e.preventDefault();
     axios
-      .post(`http://127.0.0.1:5000/auth/register`, formData, { withCredentials: true })
+      .post(REGISTER_URL, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
       .then((response) => {
         alert("Registration complete"); // Notify user on success
         registerLogInChanger(); // Switch to login view
@@ -49,6 +69,7 @@ function LogIn({ onLoginSuccess }) {
         console.error(error);
       });
   }
+
 
   const backgroundClass = signIn ? "signInBackground" : "loginBackground";
   const loginBoxClass = signIn ? "signInBox" : "loginBox";
@@ -78,6 +99,7 @@ function LogIn({ onLoginSuccess }) {
                 id="username"
                 value={formData.username}
                 onChange={handleChange}
+                ref={userRef}
               />
               <input
                 placeholder="Password"
@@ -87,7 +109,11 @@ function LogIn({ onLoginSuccess }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="button" id="submit-login-signin" onClick={handleSubmitRegister}>
+            <button
+              type="button"
+              id="submit-login-signin"
+              onClick={handleSubmitRegister}
+            >
               Sign In
             </button>
           </form>
@@ -101,6 +127,7 @@ function LogIn({ onLoginSuccess }) {
                 id="username"
                 value={formData.username}
                 onChange={handleChange}
+                ref={userRef}
               />
               <input
                 placeholder="Password"
@@ -110,7 +137,11 @@ function LogIn({ onLoginSuccess }) {
                 onChange={handleChange}
               />
             </div>
-            <button type="button" id="submit-login-signin" onClick={handleSubmitLogin}>
+            <button
+              type="button"
+              id="submit-login-signin"
+              onClick={handleSubmitLogin}
+            >
               Log In
             </button>
           </form>
