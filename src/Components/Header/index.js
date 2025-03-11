@@ -2,12 +2,19 @@ import React from "react";
 import "./style.css";
 import user from "../../images/user.svg";
 import Logo from "../../images/Logo.svg";
+import axios from "../../api/axios";
 
-function Header({ onLogoutSuccess, userInfo }) {
-  async function handleLogout(e) {
-    e.preventDefault();
-    onLogoutSuccess(); // Call the logout function passed as a prop
+
+function Header() {
+
+  function logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+  
+    // Optional: call Flask logout route to clear HttpOnly cookies
+    axios.post('/auth/logout', {}, { withCredentials: true });
   }
+
   return (
     <div className="header">
       {/* Logo section */}
@@ -20,10 +27,10 @@ function Header({ onLogoutSuccess, userInfo }) {
         <div className="username">
           <img src={user} alt="User" />
           {/* Display username from userInfo prop */}
-          <p>{userInfo.user}</p>
+          <p></p>
         </div>
         {/* Logout button */}
-        <button onClick={handleLogout}>Log Out</button>
+        <button onClick={logout}>Log Out</button>
       </div>
     </div>
   );

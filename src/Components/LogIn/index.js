@@ -9,7 +9,7 @@ const LOGIN_URL = "/auth/login";
 const REGISTER_URL = "/auth/register";
 
 // Login/Register component
-function LogIn({ onLoginSuccess }) {
+function LogIn() {
   const { setAuth } = useAuth(); // Get setAuth function from context
   const [signIn, setSignIn] = useState(false); // Toggle between login and register
   const [formData, setFormData] = useState({ username: "", password: "" }); // Form state
@@ -44,10 +44,12 @@ function LogIn({ onLoginSuccess }) {
         },
         withCredentials: true,
       });
-      const access_token = response?.data?.access_token;
-      setAuth({ access_token, formData }); // Store access token in context
-      const user = response.data; // Capture user data from the response
-      onLoginSuccess(user); // Notify parent of successful login
+      const {access_token} = response.data;
+      const user = response.data; 
+      localStorage.setItem('access_token', access_token);
+      setAuth({ access_token, user } ); // Store access token in context
+      //// Capture user data from the response
+      //onLoginSuccess(user); // Notify parent of successful login
       navigate(from, { replace: true });
     } catch (error) {
       alert("Check username or password"); // Notify user on error

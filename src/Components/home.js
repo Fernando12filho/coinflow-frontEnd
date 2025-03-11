@@ -8,9 +8,10 @@ import axios from "axios"; // HTTP client for API requests
 axios.defaults.withCredentials = true; // Ensure cookies are sent with requests
 
 // Home component: fetches user data and renders the main app layout
-function Home({ onLogoutSuccess, userData }) {
-  const [userInfo, setUserInfo] = useState("oi"); // Stores user information
-  const user = userData; // User data from parent component
+function Home() {
+  const [userInfo, setUserInfo] = useState(); // Stores user information
+  const user = window.localStorage.getItem('access_token'); // User data from parent component
+  console.log("Inside Home component, user token:", user)
   //console.log("User data:", user.access_token); // Log user data
   // TODO: Refresh log out user, fix
   // Could finally loggin, now I got to fix how the 
@@ -24,10 +25,12 @@ function Home({ onLogoutSuccess, userData }) {
       try {
         const response = await axios.get("http://127.0.0.1:5000/", { 
           headers: {
-            Authorization: `Bearer ${user.auth.access_token}`
-          } 
+            Authorization: `Bearer ${user}`
+          }, 
+          withCredentials: true
         }); 
         if (response.data.user) {
+          console.log("Resposta do servidor quando pega: ",response)
           setUserInfo(response.data); 
         } else {
           alert("User not logged in");
@@ -38,7 +41,7 @@ function Home({ onLogoutSuccess, userData }) {
     };
 
     fetchUserData(); 
-  }, [user]); 
+  }, []); 
 
   // Render loading state while waiting for user info
   // if (!userInfo) {
@@ -48,7 +51,7 @@ function Home({ onLogoutSuccess, userData }) {
   // Render main components after user info is fetched
   return (
     <div>
-      <Header onLogoutSuccess={onLogoutSuccess} userInfo={userInfo} />
+      <Header userInfo={userInfo} />
       <Hero userInfo={userInfo} />
       <UserAssetsTransactions userInfo={userInfo} />
       <News />
