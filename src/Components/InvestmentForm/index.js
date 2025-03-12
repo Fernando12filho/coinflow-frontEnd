@@ -12,6 +12,7 @@ function InvestmentsForm({ onClose, userInfo }) {
     investment_date: "",
   });
 
+  const user = window.localStorage.getItem('access_token'); 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -19,7 +20,11 @@ function InvestmentsForm({ onClose, userInfo }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://127.0.0.1:5000/create", formData);
+      const response = await axios.post("http://127.0.0.1:5000/create", formData, {
+        headers: {
+          Authorization: `Bearer ${user}`
+        }
+      });
       if (response.data.success) {
         alert("Transaction added successfully!");
         onClose();

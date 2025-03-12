@@ -6,15 +6,21 @@ import axios from "axios";
 // Receive transactions made by the user:
 // TODO: Spacement is not yet complete, for sure bugs will happen
 
-function Transactions({ userInfo }) {
-
-  const [transactions, setTransactions] = useState([userInfo.investments]);
+function Transactions() {
+  const [transactions, setTransactions] = useState([]);
+  const user = window.localStorage.getItem("access_token");
 
   async function deleteTransaction(id) {
     // Make an API request to delete the transaction with the given ID
-    try{
-      const response = await axios.delete(`http://127.0.0.1:5000/delete`, id, { withCredentials: true });
-      if(response.data.success){
+    try {
+      const response = await axios.delete(`http://127.0.0.1:5000/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${user}`,
+        },
+        withCredentials: true,
+      });
+      if (response.data.success) {
+        setTransactions((prev) => prev.filter((t) => t.id !== id));
         alert("Transaction deleted successfully");
       } else {
         alert(response.data.message || "Failed to delete transaction.");
@@ -25,10 +31,29 @@ function Transactions({ userInfo }) {
   }
 
   useEffect(() => {
-      setTransactions(userInfo.investments);
-  }, [userInfo]);
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:5000/", {
+          headers: {
+            Authorization: `Bearer ${user}`,
+          },
+          withCredentials: true,
+        });
+        if (response.data.user) {
+          console.log("Resposta do servidor quando pega: ", response.data.investments);
+          setTransactions(response.data.investments);
+        } else {
+          alert("User not logged in");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+  
+    fetchUserData();
+  }, []); //
 
-  console.log(userInfo);
+  console.log(transactions);
   return (
     <div className="transactions-panel">
       <div className="transactions-titles">
@@ -62,7 +87,10 @@ function Transactions({ userInfo }) {
             >
               {transaction.profit_loss}
             </p>
-            <button onClick={() => deleteTransaction(transaction.id)}> Delete </button>
+            <button onClick={() => deleteTransaction(transaction.id)}>
+              {" "}
+              Delete{" "}
+            </button>
           </div>
         </div>
       ))}
