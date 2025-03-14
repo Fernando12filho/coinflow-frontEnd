@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import axios from "axios";
+import axios from "../../../api/axios";
+import useAuth from "../../../hooks/useAuth";
 
 // axios.defaults.withCredentials = true;
 // Receive transactions made by the user:
@@ -8,14 +9,15 @@ import axios from "axios";
 
 function Transactions() {
   const [transactions, setTransactions] = useState([]);
-  const user = window.localStorage.getItem("access_token");
+  const user  = useAuth();
 
+  console.log(user)
   async function deleteTransaction(id) {
     // Make an API request to delete the transaction with the given ID
     try {
-      const response = await axios.delete(`http://127.0.0.1:5000/delete/${id}`, {
+      const response = await axios.delete(`/delete/${id}`, {
         headers: {
-          Authorization: `Bearer ${user}`,
+          Authorization: `Bearer ${user.auth.access_token}`,
         },
         withCredentials: true,
       });
@@ -33,9 +35,9 @@ function Transactions() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/", {
+        const response = await axios.get("/", {
           headers: {
-            Authorization: `Bearer ${user}`,
+            Authorization: `Bearer ${user.auth.access_token}`,
           },
           withCredentials: true,
         });
@@ -53,7 +55,6 @@ function Transactions() {
     fetchUserData();
   }, []); //
 
-  console.log(transactions);
   return (
     <div className="transactions-panel">
       <div className="transactions-titles">

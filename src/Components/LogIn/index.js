@@ -45,11 +45,7 @@ function LogIn() {
         withCredentials: true,
       });
       const {access_token} = response.data;
-      const user = response.data; 
-      localStorage.setItem('access_token', access_token);
-      setAuth({ access_token, user } ); // Store access token in context
-      //// Capture user data from the response
-      //onLoginSuccess(user); // Notify parent of successful login
+      setAuth( access_token ); // Store access token in context
       navigate(from, { replace: true });
     } catch (error) {
       alert("Check username or password"); // Notify user on error

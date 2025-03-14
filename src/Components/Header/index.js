@@ -3,14 +3,13 @@ import "./style.css";
 import user from "../../images/user.svg";
 import Logo from "../../images/Logo.svg";
 import axios from "../../api/axios";
+import useAuth from "../../hooks/useAuth";
 
 
 function Header() {
-
+  const { setAuth } = useAuth()
   function logout() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-  
+    setAuth({})
     // Optional: call Flask logout route to clear HttpOnly cookies
     axios.post('/auth/logout', {}, { withCredentials: true });
   }
