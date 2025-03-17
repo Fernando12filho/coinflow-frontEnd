@@ -15,11 +15,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />} >
             {/* public routes */}
-            <Route path="login" element={<LogIn />} />
+            
+              <Route path="/login" element={<LogIn />} />
 
             {/* logged in routes */}
             <Route element={<PersistLogin />}>
               <Route element={<RequireAuth />}>
+
                 <Route path="/" element={<Home />} />
               </Route>
             </Route>
