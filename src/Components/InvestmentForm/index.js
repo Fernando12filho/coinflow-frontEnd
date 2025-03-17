@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./style.css"; // Add custom CSS for styling the popup
-import axios from "axios"; // HTTP client for API requests
+import axios from "../../api/axios"; // HTTP client for API requests
+import useAuth from "../../hooks/useAuth"; // Custom hook for managing authentication
 
 axios.defaults.withCredentials = true;
 
-function InvestmentsForm({ onClose, userInfo }) {
+function InvestmentsForm({ onClose }) {
   const [formData, setFormData] = useState({
     coin_name: "Bitcoin",
     investment_amount: "",
@@ -12,7 +13,7 @@ function InvestmentsForm({ onClose, userInfo }) {
     investment_date: "",
   });
 
-  const user = window.localStorage.getItem('access_token'); 
+  const user = useAuth(); 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -20,9 +21,9 @@ function InvestmentsForm({ onClose, userInfo }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://127.0.0.1:5000/create", formData, {
+      const response = await axios.post("/create", formData, {
         headers: {
-          Authorization: `Bearer ${user}`
+          Authorization: `Bearer ${user.auth}`
         }
       });
       if (response.data.success) {

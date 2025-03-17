@@ -11,6 +11,10 @@ function Transactions() {
   const [transactions, setTransactions] = useState([]);
   const user  = useAuth();
 
+  // TODO: Add view more, expand the list of transactions
+  // TODO: Click a transaction to open a modal with more details
+  // TODO: Edit a transaction
+
   console.log(user)
   async function deleteTransaction(id) {
     // Make an API request to delete the transaction with the given ID
