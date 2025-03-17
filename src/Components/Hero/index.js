@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Hero/style.css";
 import open_eye from "../../images/open-eye.svg";
 import closed_eye from "../../images/closed-eye.svg";
 import InvestmentForm from "../InvestmentForm";
+import useAuth from "../../hooks/useAuth";
+import axios from "../../api/axios";
 
 // Hero displays user's total BTC and investment value
 function Hero({ userInfo }) {
@@ -16,6 +18,31 @@ function Hero({ userInfo }) {
   const toggleInvestedVisibility = () => setIsInvestedVisible(!isInvestedVisible);
   const toggleFormVisibility = () => setIsFormVisible(!isFormVisible); // Toggle form
 
+  const [userData, setUserData] = useState({});
+  const user  = useAuth();
+
+    useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("/", {
+          headers: {
+            Authorization: `Bearer ${user.auth.access_token}`,
+          },
+          withCredentials: true,
+        });
+        if (response.data.user) {
+          console.log("Resposta do servidor quando pega: ", response.data);
+          setUserData(response.data);
+        } else {
+          alert("User not logged in");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+  
+    fetchUserData();
+  }, []);
   
 
   return (
@@ -25,7 +52,7 @@ function Hero({ userInfo }) {
         <h2>BTC</h2>
         <div className="btc-amount-quantity">
           {/* Conditionally display BTC amount or masked value */}
-          <p>{isBtcVisible ? userInfo.total_btc_amount : "********"}</p>
+          <p>{isBtcVisible ? userData.total_btc_amount : "********"}</p>
           {/* Toggle visibility with eye icon */}
           <img
             src={isBtcVisible ? open_eye : closed_eye}
@@ -41,7 +68,7 @@ function Hero({ userInfo }) {
         <h2>Total</h2>
         <div className="btc-amount-quantity">
           {/* Conditionally display total investment or masked value */}
-          <p>{isInvestedVisible ? "$" + userInfo.total_investment_value : "********"}</p>
+          <p>{isInvestedVisible ? "$" + Number(userData.total_investment_value).toFixed(2) : "********"}</p>
           <img
             src={isInvestedVisible ? open_eye : closed_eye}
             alt="eye"

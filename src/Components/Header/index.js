@@ -1,9 +1,11 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 import user from "../../images/user.svg";
 import Logo from "../../images/Logo.svg";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
+import React from "react";
+
 
 
 function Header() {
@@ -13,6 +15,7 @@ function Header() {
     // Optional: call Flask logout route to clear HttpOnly cookies
     axios.post('/auth/logout', {}, { withCredentials: true });
   }
+
 
   return (
     <div className="header">

@@ -16,7 +16,7 @@
     font-size: 40px;
     font-weight: bold;
     padding: 12px;
-    max-width: 480px;
+    width: 480px;
     height: max-content;
     display: flex;
     flex-direction: column;
