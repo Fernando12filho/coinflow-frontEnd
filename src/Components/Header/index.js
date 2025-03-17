@@ -10,6 +10,9 @@ import React from "react";
 
 function Header() {
   const { setAuth } = useAuth()
+
+  // TODO: Create component logout so it can be reused
+  // TODO: Add on logout to clear local storage
   function logout() {
     setAuth({})
     // Optional: call Flask logout route to clear HttpOnly cookies

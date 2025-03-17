@@ -16,8 +16,9 @@ const useRefreshToken = () => {
             });
 
             setAuth(prev => {
-                console.log(JSON.stringify(prev));
-                console.log(response.data.access_token);
+                // Debugging
+                // console.log(JSON.stringify(prev));
+                // console.log(response.data.access_token);
                 return {
                     ...prev,
                     access_token: response.data.access_token
@@ -27,7 +28,8 @@ const useRefreshToken = () => {
             return response.data.access_token;
 
         } catch (err) {
-            console.error(err);
+            // Debugging
+            // console.error(err);
             navigate("/login", { state: { from: location }, replace: true });
         }
     }

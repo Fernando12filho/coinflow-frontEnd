@@ -4,17 +4,24 @@ import "./style.css";
 import plus from "../../../images/plus.svg";
 
 function Assets() {
-  const [cryptoAssets, setCryptoAssets] = useState([]); // Stores live cryptocurrency data
+  const [cryptoAssets, setCryptoAssets] = useState(localStorage.getItem("cryptoAssets")) || []; // Stores live cryptocurrency data
   const [loading, setLoading] = useState(true); // Loading state
 
   // Function to fetch live data from an API
   const fetchLivePrices = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:5000/api/crypto-prices");
-      setCryptoAssets(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching cryptocurrency data:", error);
+    if(!localStorage.getItem("cryptoAssets")) {
+      try {
+        const response = await axios.get("http://127.0.0.1:5000/api/crypto-prices");
+        setCryptoAssets(response.data);
+        setLoading(false);
+        console.log("Fetched cryptocurrency data:", response.data);
+      } catch (error) {
+        console.error("Error fetching cryptocurrency data:", error);
+        setLoading(false);
+      }
+      console.log("No data in localStorage. Fetching cryptocurrency data...");
+    } else {
+      setCryptoAssets(JSON.parse(localStorage.getItem("cryptoAssets")));
       setLoading(false);
     }
   };
@@ -64,7 +71,7 @@ function Assets() {
 
   return (
     <div className="asset-card-tab">
-      {cryptoAssets && cryptoAssets.map && cryptoAssets.map((asset, index) => (
+      {cryptoAssets.map((asset, index) => (
         <div
           className="asset-card"
           key={index}
