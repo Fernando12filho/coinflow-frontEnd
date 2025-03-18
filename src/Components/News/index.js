@@ -20,6 +20,9 @@ function News() {
           <p>{newsItem.subline}</p>
         </div>
       ))}
+      <div className="grid-item terceary-news">
+        <button>Write Yours</button>
+      </div>
     </div>
   );
 }

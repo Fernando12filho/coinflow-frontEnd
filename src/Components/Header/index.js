@@ -18,6 +18,7 @@ function Header() {
     setAuth({})
     // Optional: call Flask logout route to clear HttpOnly cookies
     axios.post('/auth/logout', {}, { withCredentials: true });
+    localStorage.clear();
   }
 
 
@@ -27,6 +28,11 @@ function Header() {
       <div className="logo">
         <img src={Logo} alt="Logo" />
         <p>CoinFlow</p>
+      </div>
+      <div className="nav">
+        <a href="/Newsletter">Newsletter</a>
+        <a href="/InvoiceMK">Invoice MK</a>
+        <a href="/Forum"> Forum </a>
       </div>
       {/* User info and logout */}
       <div className="username-logout">

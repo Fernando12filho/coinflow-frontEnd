@@ -19,11 +19,6 @@ const testNews = [
       headline: "Bitcoin vs Ethereum: Which is the Better Investment in 2024?",
       subline: "A detailed comparison of the top two cryptocurrencies.",
     },
-    {
-      image: "https://example.com/bitcoin-el-salvador.jpg",
-      headline: "El Salvador Expands Bitcoin Adoption Amid Global Attention",
-      subline: "The Central American nation doubles down on its Bitcoin strategy.",
-    },
   ];
   
   export default testNews;
