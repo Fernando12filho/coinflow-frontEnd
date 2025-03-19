@@ -6,6 +6,9 @@ import { Routes, Route } from 'react-router-dom';
 import PersistLogin from "../src/Components/PersistLogin";
 import Layout from "./Components/Layout";
 import RequireAuth from "./Components/RequireAuth";
+import Newsletter from "./Components/newsletter";
+import Forum from "./Components/forum";
+import InvoiceMK from "./Components/invoiceMK";
 
 
 function App() {
@@ -23,6 +26,10 @@ function App() {
               <Route element={<RequireAuth />}>
 
                 <Route path="/" element={<Home />} />
+                <Route path="/newsletter" element={<Newsletter />} />
+                <Route path="/invoiceMK" element={<InvoiceMK />} />
+                <Route path="/forum" element={<Forum />} />
+                {/* <Route path="/logout" element={} /> */}
               </Route>
             </Route>
           </Route>

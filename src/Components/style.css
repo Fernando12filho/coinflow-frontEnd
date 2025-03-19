@@ -1,0 +1,55 @@
+.container{
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    height: 231px;
+    margin-top: 80px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+.newsletter-form-container-children{
+    font-family: "BarlowCondensed";
+    background-color: transparent;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 12px;
+    width: 480px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.newsletter-form-container-children input{
+    margin-bottom: 8px;
+}
+
+.article-newsletter{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.article-newsletter h1{
+    font-family: "BarlowCondensed";
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    background-color: transparent;
+}
+
+.article-newsletter .grid{
+    background-color: transparent;
+}
+
+.article-newsletter p{
+    font-family: "BarlowCondensed";
+    font-size: 20px;
+    font-weight: normal;
+    background-color: transparent;
+}

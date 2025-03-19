@@ -7,7 +7,11 @@
     display: flex;
     justify-content: space-between;
     font-family:'BarlowCondensed';  
-    
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 p{
@@ -69,4 +73,28 @@ p{
 button:hover{
     cursor: pointer;
     background-color: #1799da;
+}
+
+.nav{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 24px;
+    font-family: 'BarlowCondensed';
+}
+
+.nav a{
+    text-decoration: none;
+    color: black;
+    margin: 0 8px;
+}
+
+.nav a:hover{
+    color: #0088CC;
+    font-weight: bold;
+}
+
+.nav a.active{
+    color: #0088CC;
+    font-weight: bold;
 }
