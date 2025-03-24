@@ -48,7 +48,7 @@
     min-width: 300px;
     flex-direction: column;
     align-items: center;
-    height: 240px;
+    /* height: 240px; */
     background-color: white;
 }
 

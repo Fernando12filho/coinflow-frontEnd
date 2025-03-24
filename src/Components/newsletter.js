@@ -1,16 +1,36 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import './style.css';
+import axios from '../api/axios';
+import useAuth from '../hooks/useAuth';
+axios.defaults.withCredentials = true;
 
 
 const Newsletter = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const user = useAuth();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your form submission logic here
-        setMessage('Thank you for subscribing!');
+        try{
+            axios.post('/newsletter/subscribe', {
+                Headers: {
+                    Authorization: `Bearer ${user.auth.access_token}`,
+                },
+            })
+            .then((response) => {
+                if (response.data) {
+                    setMessage(response.data.message);
+                } else {
+                    setMessage(response.data.message || 'Failed to subscribe!');
+                }
+            })
+        } catch (error) {
+            console.error(error);
+            setMessage('Failed to subscribe!');
+            return;
+        }
     };
 
     // TODO: Add is subscribed on backend

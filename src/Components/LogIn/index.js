@@ -12,7 +12,7 @@ const REGISTER_URL = "/auth/register";
 function LogIn() {
   const { setAuth } = useAuth(); // Get setAuth function from context
   const [signIn, setSignIn] = useState(false); // Toggle between login and register
-  const [formData, setFormData] = useState({ username: "", password: "" }); // Form state
+  const [formData, setFormData] = useState({email: "" , username: "", password: "" }); // Form state
   const userRef = useRef(); // Reference to user input field
 
   const navigate = useNavigate();
@@ -97,6 +97,14 @@ function LogIn() {
           <form>
             <div className="log">
               <h1>Sign In</h1>
+              <input
+                placeholder="Email"
+                type="text"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+                ref={userRef}
+              />
               <input
                 placeholder="Username"
                 type="text"
