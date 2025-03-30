@@ -9,6 +9,11 @@ const useRefreshToken = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // TODO: Add user to context after refresh 
+    // OR get user from backend after refresh on newsletter page
+    // Route has to be created on backend to retrieve if user is subscribed or not
+    //on the newsletter page. 
+
     const refresh = async () => {
         try {
             const response = await axios.get('/auth/refresh', {
@@ -21,7 +26,11 @@ const useRefreshToken = () => {
                 // console.log(response.data.access_token);
                 return {
                     ...prev,
-                    access_token: response.data.access_token
+                    access_token: response.data.access_token,
+                    user: {
+                        ...prev,
+                        isSubscribed: response.data.isSubscribed
+                    }
                 };
             });
 

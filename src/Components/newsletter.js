@@ -11,6 +11,10 @@ const Newsletter = () => {
     const [message, setMessage] = useState('');
     const user = useAuth();
 
+    // TODO: Needs to refresh token on newsletter page
+    // TODO: Needs to check if user is subscribed on newsletter page
+    // TODO: Close button in case user just dont want to look at it 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         try{
@@ -22,6 +26,7 @@ const Newsletter = () => {
             .then((response) => {
                 if (response.data) {
                     setMessage(response.data.message);
+
                 } else {
                     setMessage(response.data.message || 'Failed to subscribe!');
                 }
@@ -33,25 +38,38 @@ const Newsletter = () => {
         }
     };
 
+    console.log(user);
+
     // TODO: Add is subscribed on backend
 
     return (
         <div className="newsletter">
             <Header />
-            <div className='newsletter-form container'>
-                <h2 className='newsletter-form-container-children'>Subscribe to our Newsletter</h2>
-                <form onSubmit={handleSubmit} className='newsletter-form-container-children'>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter your email"
-                        required
-                    />
-                    <button type="submit">Subscribe</button>
-                </form>
-                {message && <p>{message}</p>}
-            </div>
+
+            {
+                user.user.isSubscribed ? (
+                    <div className="newsletter-subscribed container"style={{display: 'none'}}>
+                        <h1>Subscribed</h1>
+                        <p>You are subscribed to our newsletter</p>
+                    </div>
+                ) : (
+                    <div className='newsletter-form container'>
+                        <h2 className='newsletter-form-container-children'>Subscribe to our Newsletter</h2>
+                        <form onSubmit={handleSubmit} className='newsletter-form-container-children'>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
+                                required
+                            />
+                            <button type="submit">Subscribe</button>
+                        </form>
+                        {message && <p>{message}</p>}
+                    </div>
+                )
+            }
+
             <div className='article-newsletter container'>
                 <h1>Past Newsletters</h1>
                 <div className='grid'>

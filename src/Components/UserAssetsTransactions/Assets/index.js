@@ -36,9 +36,6 @@ function Assets() {
     return <div className="asset-card-tab">Loading prices...</div>;
   }
 
-  /*if (!Array.isArray(cryptoAssets)) {
-    return <div>Error: Could not fetch crypto assets.</div>;
-  }*/
 
   const coinColors = {
     bitcoin: "#F7931A", // Orange
@@ -71,17 +68,25 @@ function Assets() {
 
   return (
     <div className="asset-card-tab">
-      {cryptoAssets.map((asset, index) => (
-        <div
-          className="asset-card"
-          key={index}
-          style={{ backgroundColor: getBackgroundColor(asset.name), color: getTextColor(getBackgroundColor(asset.name)) }} // Dynamic color assignment
-        >
-          <img src={asset.image} alt="Crypto" />
-          <p id="card-middle">{asset.name}</p>
-          <p>${asset.current_price}</p>
-        </div>
-      ))}
+      {
+        cryptoAssets.length === 0 ? (
+          <div className="asset-card" id="no-assets-card">
+            <p>No assets added yet</p>
+          </div>
+        ) : (
+          cryptoAssets.map((asset, index) => (
+            <div
+              className="asset-card"
+              key={index}
+              style={{ backgroundColor: getBackgroundColor(asset.name), color: getTextColor(getBackgroundColor(asset.name)) }} // Dynamic color assignment
+            >
+              <img src={asset.image} alt="Crypto" />
+              <p id="card-middle">{asset.name}</p>
+              <p>${asset.current_price}</p>
+            </div>
+          ))
+        )
+      }
 
       <div className="asset-card" id="add-asset-card">
         <button className="add-asset-button">

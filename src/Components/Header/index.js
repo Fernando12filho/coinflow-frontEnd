@@ -1,5 +1,5 @@
 import "./style.css";
-import user from "../../images/user.svg";
+import userImg from "../../images/user.svg";
 import Logo from "../../images/Logo.svg";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
@@ -7,7 +7,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Header() {
-  const { setAuth } = useAuth();
+  const { setAuth, user } = useAuth();
+
 
   // TODO: Create component logout so it can be reused
   // TODO: Add on logout to clear local storage
@@ -50,9 +51,9 @@ function Header() {
       {/* User info and logout */}
       <div className="username-logout">
         <div className="username">
-          <img src={user} alt="User" />
+          <img src={userImg} alt="User" />
           {/* Display username from userInfo prop */}
-          <p></p>
+          <p>{user.username}</p>
         </div>
         {/* Logout button */}
         <button onClick={logout}>Log Out</button>
