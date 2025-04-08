@@ -8,7 +8,7 @@ import testNews from "../TestObjects/newsObject.js";
 function News() {
   return (
     <div className="news-panel-grid">
-      {testNews.map((newsItem, index) => (
+      {/* {testNews.map((newsItem, index) => (
         <div
           className={`grid-item ${
             index === 0 ? "main-new" : index === 1 || index === 2 ? "secondary-news" : "terceary-news"
@@ -22,7 +22,9 @@ function News() {
       ))}
       <div className="grid-item terceary-news">
         <button>Write Yours</button>
-      </div>
+      </div> */}
+
+      <h1>Upcoming</h1>
     </div>
   );
 }
