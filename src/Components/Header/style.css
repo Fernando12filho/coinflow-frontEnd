@@ -98,3 +98,11 @@ button:hover{
     color: #0088CC;
     font-weight: bold;
 }
+
+.disabled-link {
+    pointer-events: none; /* disables click */
+    color: gray;           /* makes it look disabled */
+    opacity: 0.6;          /* slightly faded */
+    text-decoration: none; /* remove underline if needed */
+    cursor: not-allowed;   /* shows "not allowed" cursor */
+  }
