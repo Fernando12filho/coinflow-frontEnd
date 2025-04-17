@@ -4,7 +4,7 @@ import useAuth from './useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const useRefreshToken = () => {
-    const { setAuth, setUser } = useAuth();
+    const { setAuth, setUser, setInvestments } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,7 +31,8 @@ const useRefreshToken = () => {
             });
 
             setUser(response.data.user);
-
+            // console.log("Resposta do servidor quando pega: ", response.data.user);
+            console.log("Resposta do servidor dentro the use refresh token: ", response.data.investments);
             return response.data.access_token;
 
         } catch (err) {
