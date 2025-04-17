@@ -4,7 +4,7 @@ import useAuth from './useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const useRefreshToken = () => {
-    const { setAuth } = useAuth();
+    const { setAuth, setUser } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -27,12 +27,10 @@ const useRefreshToken = () => {
                 return {
                     ...prev,
                     access_token: response.data.access_token,
-                    user: {
-                        ...prev,
-                        isSubscribed: response.data.isSubscribed
-                    }
                 };
             });
+
+            setUser(response.data.user);
 
             return response.data.access_token;
 
