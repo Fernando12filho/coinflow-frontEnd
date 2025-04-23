@@ -58,7 +58,7 @@ function Header() {
         <div className="username">
           <img src={userImg} alt="User" />
           {/* Display username from userInfo prop */}
-          {/* <p>{user.username}</p> */}
+          <p>{user.username}</p>
         </div>
         {/* Logout button */}
         <button onClick={logout}>Log Out</button>
