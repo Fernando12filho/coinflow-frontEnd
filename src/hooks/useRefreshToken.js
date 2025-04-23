@@ -32,7 +32,7 @@ const useRefreshToken = () => {
 
             setUser(response.data.user);
             // console.log("Resposta do servidor quando pega: ", response.data.user);
-            console.log("Resposta do servidor dentro the use refresh token: ", response.data.investments);
+            //console.log("Resposta do servidor dentro the use refresh token: ", response.data.investments);
             return response.data.access_token;
 
         } catch (err) {
