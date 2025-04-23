@@ -9,12 +9,11 @@ import { NavLink } from "react-router-dom";
 function Header() {
   const { setAuth, user } = useAuth();
 
-
   // TODO: Create component logout so it can be reused
   // TODO: Add on logout to clear local storage
   // TODO: Get user name from backend
   // TODO: Add user name to the header
-  
+
   function logout() {
     setAuth({});
     // Optional: call Flask logout route to clear HttpOnly cookies
@@ -34,16 +33,22 @@ function Header() {
       <div className="nav">
         <NavLink
           to="/Newsletter"
+          onClick={(e) => e.preventDefault()}
+          className="disabled-link"
         >
           Newsletter
         </NavLink>
         <NavLink
           to="/InvoiceMK"
+          onClick={(e) => e.preventDefault()}
+          className="disabled-link"
         >
           Invoice MK
         </NavLink>
         <NavLink
           to="/Forum"
+          onClick={(e) => e.preventDefault()}
+          className="disabled-link"
         >
           Forum
         </NavLink>

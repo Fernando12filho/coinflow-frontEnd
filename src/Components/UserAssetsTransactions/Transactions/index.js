@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 import axios from "../../../api/axios";
 import useAuth from "../../../hooks/useAuth";
@@ -8,25 +8,25 @@ import useAuth from "../../../hooks/useAuth";
 // TODO: Spacement is not yet complete, for sure bugs will happen
 
 function Transactions() {
-  const [transactions, setTransactions] = useState([]);
-  const user  = useAuth();
+  //const [transactions, setTransactions] = useState([]);
+  const {auth, investments, setInvestments }  = useAuth();
 
   // TODO: Add view more, expand the list of transactions
   // TODO: Click a transaction to open a modal with more details
   // TODO: Edit a transaction
+  // TODO: Make update happen when transaction is added
 
-  console.log(user)
   async function deleteTransaction(id) {
     // Make an API request to delete the transaction with the given ID
     try {
       const response = await axios.delete(`/delete/${id}`, {
         headers: {
-          Authorization: `Bearer ${user.auth.access_token}`,
+          Authorization: `Bearer ${auth.access_token}`,
         },
         withCredentials: true,
       });
       if (response.data.success) {
-        setTransactions((prev) => prev.filter((t) => t.id !== id));
+        setInvestments(response.data.investments); // Update the state with the new transactions list
         alert("Transaction deleted successfully");
       } else {
         alert(response.data.message || "Failed to delete transaction.");
@@ -37,27 +37,27 @@ function Transactions() {
   }
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get("/", {
-          headers: {
-            Authorization: `Bearer ${user.auth.access_token}`,
-          },
-          withCredentials: true,
-        });
-        if (response.data.user) {
-          console.log("Resposta do servidor quando pega: ", response.data.investments);
-          setTransactions(response.data.investments);
-        } else {
-          alert("User not logged in");
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-  
-    fetchUserData();
-  }, []); //
+     const fetchUserData = async () => {
+       try {
+         const response = await axios.get("/", {
+           headers: {
+             Authorization: `Bearer ${auth.access_token}`,
+           },
+           withCredentials: true,
+         });
+         if (response.data.user) {
+           console.log("Resposta do servidor quando pega: ", response.data.investments);
+           setInvestments(response.data.investments);
+         } else {
+           alert("User not logged in");
+         }
+       } catch (error) {
+         console.error("Error fetching user data:", error);
+       }
+     };
+
+      fetchUserData();
+  }, []); 
 
   return (
     <div className="transactions-panel">
@@ -70,7 +70,7 @@ function Transactions() {
         <p>Profit / Loss</p>
         <button> Delete </button>
       </div>
-      {transactions.map((transaction, index) => (
+      {investments.map((transaction) => (
         <div className="transactions-input-bg">
           <div className="transactions-input">
             <p>{transaction.coin_name}</p>
