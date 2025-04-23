@@ -4,7 +4,10 @@ import "./style.css";
 import plus from "../../../images/plus.svg";
 
 function Assets() {
-  const [cryptoAssets, setCryptoAssets] = useState(localStorage.getItem("cryptoAssets")) || []; // Stores live cryptocurrency data
+  const [cryptoAssets, setCryptoAssets] = useState(() => {
+    const storedAssets = localStorage.getItem("cryptoAssets");
+    return storedAssets ? JSON.parse(storedAssets) : [];
+  });
   const [loading, setLoading] = useState(true); // Loading state
 
   // Function to fetch live data from an API
@@ -26,10 +29,14 @@ function Assets() {
     }
   };
 
-  // Fetch data on component mount
   useEffect(() => {
     fetchLivePrices();
   }, []);
+
+  // Fetch data on component mount
+  useEffect(() => {
+    localStorage.setItem("cryptoAssets", JSON.stringify(cryptoAssets));
+  }, [cryptoAssets]);
 
   // Fallback for loading state
   if (loading) {

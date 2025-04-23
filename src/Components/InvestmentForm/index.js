@@ -13,7 +13,7 @@ function InvestmentsForm({ onClose }) {
     investment_date: "",
   });
 
-  const user = useAuth(); 
+  const { user, setInvestments } = useAuth(); 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -28,6 +28,7 @@ function InvestmentsForm({ onClose }) {
       });
       if (response.data.success) {
         alert("Transaction added successfully!");
+        setInvestments(response.data.investments); // Update the investments state with the new data
         onClose();
       } else {
         alert("Error adding transaction.");
