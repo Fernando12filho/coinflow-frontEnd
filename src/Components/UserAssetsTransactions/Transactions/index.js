@@ -57,7 +57,7 @@ function Transactions() {
      };
 
       fetchUserData();
-  }, []); 
+  }, [auth.access_token, setInvestments]); 
 
   return (
     <div className="transactions-panel">

@@ -4,7 +4,7 @@ import useAuth from './useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const useRefreshToken = () => {
-    const { setAuth, setUser, setInvestments } = useAuth();
+    const { setAuth, setUser } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
