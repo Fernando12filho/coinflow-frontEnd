@@ -212,7 +212,7 @@ function LogIn() {
           </ul>
         </div>
 
-        <div className="about-content">
+        {/* <div className="about-content">
           <h2 className="fira-bold">What is Coinflow?</h2>
           <p className="fira-medium"></p>
         </div>
@@ -220,7 +220,7 @@ function LogIn() {
         <div className="about-content">
           <h2 className="fira-bold">What is Coinflow?</h2>
           <p className="fira-medium"></p>
-        </div>
+        </div> */}
       </div>
 
       {/* Footer Section */}
