@@ -205,7 +205,7 @@ function LogIn() {
         <div className="about-content">
           <h2 className="fira-bold">Coming Soon</h2>
           <ul className="fira-medium features-list">
-            <li className="fira-medium">📈 Advanced Analytics (profit/loss, tax reports)</li>
+            <li><p>Advanced Analytics (profit/loss, tax reports)</p></li>
             <li><p>Multi-currency Support</p></li>
             <li><p>Mobile App Version</p></li>
             <li><p>Self-custody Education & Tools</p></li>
