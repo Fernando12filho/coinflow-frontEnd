@@ -12,12 +12,14 @@
     margin: 0;
     padding: 0;
     background-color: #EEEEEE;
+
 }
 
 
 
 .App{
-    margin: 0 auto;
-    padding: 40px ;
-    max-width: 1440px;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+} 

@@ -42,7 +42,7 @@ function Hero({ userInfo }) {
     };
   
     fetchUserData();
-  }, []);
+  }, [user.auth.access_token]);
   
 
   return (

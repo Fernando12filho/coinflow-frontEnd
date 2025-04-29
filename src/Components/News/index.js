@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import testNews from "../TestObjects/newsObject.js";
+
 
 //Component receives from api news images, headline, subline and link
 //In case image does not come with it, choose from database
