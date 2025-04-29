@@ -53,3 +53,7 @@
     font-weight: normal;
     background-color: transparent;
 }
+
+ .home-container {
+    max-width: 1080px;
+} 
