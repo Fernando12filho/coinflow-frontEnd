@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.css"; // Add custom CSS for styling the popup
 import axios from "../../api/axios"; // HTTP client for API requests
 import useAuth from "../../hooks/useAuth"; // Custom hook for managing authentication
-
+import Swal from 'sweetalert2'; // SweetAlert2 for better alerts
 axios.defaults.withCredentials = true;
 
 function InvestmentsForm({ onClose }) {
@@ -27,13 +27,35 @@ function InvestmentsForm({ onClose }) {
         }
       });
       if (response.data.success) {
-        alert("Transaction added successfully!");
+        Swal.fire({
+          showClass: {
+            popup: 'swal2-show',
+            backdrop: 'swal2-backdrop-show'
+          },
+          backgroundColor: '#fff',
+          position: "center",
+          icon: "success",
+          title: "Transaction has been saved",
+          showConfirmButton: false
+        });
         setInvestments(response.data.investments); // Update the investments state with the new data
-        onClose();
+        onClose();      
       } else {
         alert("Error adding transaction.");
       }
     } catch (error) {
+      Swal.fire({
+        showClass: {
+          popup: 'swal2-show',
+          backdrop: 'swal2-backdrop-show'
+        },
+        backgroundColor: '#fff',
+        position: "center",
+        icon: "error",
+        title: "Error adding transaction",
+        text: error.response.data.message || "An error occurred.",
+        showConfirmButton: true
+      });
       console.error("Error:", error);
     }
   };

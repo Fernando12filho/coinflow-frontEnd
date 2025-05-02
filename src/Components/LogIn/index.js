@@ -4,6 +4,7 @@ import logo from "../../images/Logo.svg";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
+import Swal from 'sweetalert2'; // SweetAlert2 for better alerts
 
 const LOGIN_URL = "/auth/login";
 const REGISTER_URL = "/auth/register";
@@ -55,7 +56,19 @@ function LogIn() {
       setUser(user); // Store user data in context
       navigate(from, { replace: true });
     } catch (error) {
-      alert("Check username or password"); // Notify user on error
+      // Notify user on error
+      Swal.fire({
+        showClass: {
+          popup: 'swal2-show',
+          backdrop: 'swal2-backdrop-show'
+        },
+        backgroundColor: '#fff',
+        position: "center",
+        icon: "error",
+        title: "Error logging in",
+        text: error.response.data.message || "Check Username or Password.",
+        showConfirmButton: true
+      });
       console.error(error);
     }
   }
@@ -71,7 +84,18 @@ function LogIn() {
         withCredentials: true,
       })
       .then((response) => {
-        alert("Registration complete"); // Notify user on success
+        Swal.fire({
+          showClass: {
+            popup: 'swal2-show',
+            backdrop: 'swal2-backdrop-show'
+          },
+          backgroundColor: '#fff',
+          position: "center",
+          icon: "success",
+          title: "Registration complete",
+          timer: 1500,
+          showConfirmButton: false
+        });
         registerLogInChanger(); // Switch to login view
         setFormData({ username: "", password: "" }); // Clear form
       })

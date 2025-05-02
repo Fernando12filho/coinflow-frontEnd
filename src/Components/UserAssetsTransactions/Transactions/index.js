@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./style.css";
 import axios from "../../../api/axios";
 import useAuth from "../../../hooks/useAuth";
+import Swal from 'sweetalert2'; // SweetAlert2 for better alerts
 
 // axios.defaults.withCredentials = true;
 // Receive transactions made by the user:
@@ -27,9 +28,31 @@ function Transactions() {
       });
       if (response.data.success) {
         setInvestments(response.data.investments); // Update the state with the new transactions list
-        alert("Transaction deleted successfully");
+        Swal.fire({
+          showClass: {
+            popup: 'swal2-show',
+            backdrop: 'swal2-backdrop-show'
+          },
+          backgroundColor: '#fff',
+          position: "center",
+          icon: "success",
+          title: "Transaction has been deleted",
+          showConfirmButton: false
+        });
       } else {
-        alert(response.data.message || "Failed to delete transaction.");
+        Swal.fire({
+          showClass: {
+            popup: 'swal2-show',
+            backdrop: 'swal2-backdrop-show'
+          },
+          backgroundColor: '#fff',
+          position: "center",
+          icon: "error",
+          title: "Error deleting transaction",
+          text: response.data.message || "An error occurred.",
+          showConfirmButton: true
+        });
+        console.error("Error deleting transaction:", response.data.message);
       }
     } catch (error) {
       console.error(error);
