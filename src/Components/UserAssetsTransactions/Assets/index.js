@@ -77,7 +77,7 @@ function Assets() {
     <div className="asset-card-tab">
       {
         cryptoAssets.length === 0 ? (
-          <div className="asset-card" id="no-assets-card" style={{ backgroundColor: "#f0f0f0", color: "#000" }}>
+          <div className="asset-card" id="no-assets-card" style={{ backgroundColor: "#f0f0f0", color: "#000" }}>  
             <p>No assets added yet</p>
           </div>
         ) : (
