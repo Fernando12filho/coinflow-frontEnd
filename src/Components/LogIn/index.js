@@ -43,6 +43,23 @@ function LogIn() {
   async function handleSubmitLogin(e) {
     e.preventDefault();
     try {
+      // Show loading animation
+      Swal.fire({
+        showClass: {
+          popup: 'swal2-show',
+          backdrop: 'swal2-backdrop-show'
+        },
+        backgroundColor: '#fff',
+        position: "center",
+        title: "Logging in...",
+        showConfirmButton: false,
+        didOpen: () => {
+          Swal.showLoading(); // Show loading animation
+        },
+        willClose: () => {
+          Swal.hideLoading(); // Hide loading animation
+        }
+      });
       const response = await axios.post(LOGIN_URL, formData, {
         headers: {
           "Content-Type": "application/json",
@@ -55,6 +72,8 @@ function LogIn() {
       setAuth(access_token); // Store access token in context
       setUser(user); // Store user data in context
       navigate(from, { replace: true });
+      //close sweet alert
+      Swal.close(); // Close the loading animation
     } catch (error) {
       // Notify user on error
       Swal.fire({
@@ -75,6 +94,22 @@ function LogIn() {
 
   // Submit register form
   async function handleSubmitRegister(e) {
+    Swal.fire({
+      showClass: {
+        popup: 'swal2-show',
+        backdrop: 'swal2-backdrop-show'
+      },
+      backgroundColor: '#fff',
+      position: "center",
+      title: "Logging in...",
+      showConfirmButton: false,
+      didOpen: () => {
+        Swal.showLoading(); // Show loading animation
+      },
+      willClose: () => {
+        Swal.hideLoading(); // Hide loading animation
+      }
+    });
     e.preventDefault();
     axios
       .post(REGISTER_URL, formData, {

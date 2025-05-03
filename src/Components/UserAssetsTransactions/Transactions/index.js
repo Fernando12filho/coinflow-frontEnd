@@ -11,15 +11,36 @@ import Swal from 'sweetalert2'; // SweetAlert2 for better alerts
 function Transactions() {
   //const [transactions, setTransactions] = useState([]);
   const {auth, investments, setInvestments }  = useAuth();
-
+  //const [loading, setLoading] = useState(false); // Loading state
   // TODO: Add view more, expand the list of transactions
   // TODO: Click a transaction to open a modal with more details
   // TODO: Edit a transaction
   // TODO: Make update happen when transaction is added
 
   async function deleteTransaction(id) {
-    // Make an API request to delete the transaction with the given ID
+    // Make an API request to delete the transaction with the given IDe
+    //Swal fire for loading if state is true
+
+
     try {
+      //Swal fire for loading
+      Swal.fire({
+        showClass: {
+          popup: 'swal2-show',
+          backdrop: 'swal2-backdrop-show'
+        },
+        backgroundColor: '#fff',
+        position: "center",
+        title: "Deleting transaction...",
+        showConfirmButton: false,
+        didOpen: () => {
+          Swal.showLoading(); // Show loading animation
+        },
+        willClose: () => {
+          Swal.hideLoading(); // Hide loading animation
+        }
+      });
+      // Make the API request to delete the transaction     
       const response = await axios.delete(`/delete/${id}`, {
         headers: {
           Authorization: `Bearer ${auth.access_token}`,
@@ -27,6 +48,7 @@ function Transactions() {
         withCredentials: true,
       });
       if (response.data.success) {
+
         setInvestments(response.data.investments); // Update the state with the new transactions list
         Swal.fire({
           showClass: {
